@@ -45,4 +45,22 @@ public class ComplexMatrix {
         }
         return result;
     }
+
+    @Override 
+    public boolean equals(Object o) {
+        if (o == this) return true;
+        if (!(o instanceof ComplexMatrix)) return false;
+        ComplexMatrix other = (ComplexMatrix) o;
+        if (rows != other.rows || cols != other.cols) {
+            return false;
+        }
+        for (int i = 0; i < rows; i++) {
+            for (int j = 0; j < cols; j++) {
+                if (!data[i][j].equals(other.data[i][j])) {
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
 }
