@@ -24,4 +24,25 @@ public class ComplexMatrix {
     public int getCols() {
         return cols;
     }
+
+    public Complex get(int i, int j) {
+        return data[i][j];
+    }
+
+    public void set(int i, int j, Complex value) {
+        data[i][j] = value;
+    }
+
+    public ComplexMatrix add(ComplexMatrix other) {
+        if (rows != other.rows || cols != other.cols) {
+            throw new IllegalArgumentException("Сложить нельзя(у матриц разные размеры)");
+        }
+        ComplexMatrix result = new ComplexMatrix(rows, cols);
+        for (int i = 0; i < rows; i++) {
+            for (int j = 0; j < cols; j++) {
+                result.data[i][j] = data[i][j].plus(other.data[i][j]);
+            }
+        }
+        return result;
+    }
 }
