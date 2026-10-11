@@ -63,4 +63,16 @@ public class ComplexMatrix {
         }
         return true;
     }
+
+    @Override
+    public String toString() {
+        String text = "";
+        for (int i = 0; i < rows; i++) {
+            for (int j = 0; j < cols; j++) {
+                text += data[i][j] + " ";
+            }
+            text += "\n";
+        }
+        return text;
+    }
 }
