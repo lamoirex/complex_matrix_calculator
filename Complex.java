@@ -38,4 +38,8 @@ public class Complex {
         double newIm = (im * other.re - re * other.im) / denominator;
         return new Complex(newRe, newIm);
     }
+
+    public boolean isZero() {
+        return Math.abs(re) < 1e-9 && Math.abs(im) < 1e-9;
+    }
 }
