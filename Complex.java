@@ -14,4 +14,28 @@ public class Complex {
     public double getIm() {
         return im;
     }
+
+    public Complex plus(Complex other) {
+        return new Complex(re + other.re, im + other.im);
+    }
+
+    public Complex minus(Complex other) {
+        return new Complex(re - other.re, im - other.im);
+    }
+
+    public Complex multiply(Complex other) {
+        double newRe = re * other.re - im * other.im;
+        double newIm = re * other.im + im * other.re;
+        return new Complex(newRe, newIm);
+    }
+
+    public Complex divide(Complex other) {
+        double denominator = other.re * other.re + other.im * other.im;
+        if (denominator == 0) {
+            throw new ArithmeticException("Деление на ноль!");
+        }
+        double newRe = (re * other.re + im * other.im) / denominator;
+        double newIm = (im * other.re - re * other.im) / denominator;
+        return new Complex(newRe, newIm);
+    }
 }
