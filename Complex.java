@@ -42,4 +42,21 @@ public class Complex {
     public boolean isZero() {
         return Math.abs(re) < 1e-9 && Math.abs(im) < 1e-9;
     }
+
+    @Override 
+    public boolean equals(Object o) {
+        if (o == this) return true;
+        if (!(o instanceof Complex)) return false;
+        Complex other = (Complex) o;
+        return re == other.re && im == other.im;
+    }
+
+    @Override 
+    public String toString() {
+        if (im >= 0) {
+            return re + "+" + im + "i";
+        } else {
+            return re + "-" + (-im) + "i";
+        }
+    }
 }
