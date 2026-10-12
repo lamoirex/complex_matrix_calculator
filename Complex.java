@@ -51,12 +51,18 @@ public class Complex {
         return re == other.re && im == other.im;
     }
 
+    private double round(double x) {
+        return Math.round(x * 10000) / 10000.0
+    }
+
     @Override 
     public String toString() {
-        if (im >= 0) {
-            return re + "+" + im + "i";
+        double shownRe = round(re);
+        double shownIm = round(im);
+        if (shownIm >= 0) {
+            return shownRe + "+" + shownIm + "i";
         } else {
-            return re + "-" + (-im) + "i";
+            return shownRe + "-" + (-shownIm) + "i";
         }
     }
 }
