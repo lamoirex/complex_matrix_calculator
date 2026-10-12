@@ -73,6 +73,31 @@ public class ComplexMatrix {
         return result;
     }
 
+    private ComplexMatrix copy() {
+        ComplexMatrix result = new ComplexMatrix(rows, cols);
+        for (int i = 0; i < cols; i++) {
+            for (int j = 0; j < cols; j++) {
+                result.data[i][j] = data[i][j];
+            }
+        }
+        return result;
+    }
+
+    private void swapRows(int row1, int row2) {
+        Complex[] temp = data[row1];
+        data[row1] = data[row2];
+        data[row2] = temp;
+    }
+
+    private int findPivotRow(int col, int startRow) {
+        for (int i = startRow; i < rows; i++) {
+            if (!data[i][col].isZero()) {
+                return i;
+            }
+        }
+        return -1;
+    }
+
     @Override 
     public boolean equals(Object o) {
         if (o == this) return true;
