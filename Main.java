@@ -43,4 +43,15 @@ public class Main {
         }
         System.out.println("Программа завершена.")
     }
+
+    private static void printMenu() {
+        System.out.println();
+        System.out.println("Что делаем?");
+        System.out.println("1. Сложить две матрицы (A + B)");
+        System.out.println("2. Перемножить две матрицы (A * B)");
+        System.out.println("3. Разделить две матрицы (A / B)");
+        System.out.println("4. Транспонировать матрицу");
+        System.out.println("5. Вычислить определитель матрицы");
+        System.out.println("0. Выход");
+    }
 }
