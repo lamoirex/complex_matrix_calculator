@@ -63,6 +63,16 @@ public class ComplexMatrix {
         return result
     }
 
+    public ComplexMatrix transpose() {
+        ComplexMatrix result = new ComplexMatrix(cols, rows);
+        for (int i = 0; i < rows; i++) {
+            for (int j = 0; j < cols; j++) {
+                result.data[j][i] = data[i][j];
+            }
+        }
+        return result;
+    }
+
     @Override 
     public boolean equals(Object o) {
         if (o == this) return true;
