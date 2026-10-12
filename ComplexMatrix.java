@@ -98,6 +98,36 @@ public class ComplexMatrix {
         return -1;
     }
 
+    public Complex determinant() {
+        if (rows != cols) {
+            throw new IllegalArgumentException("Определитель есть только у квадратной матрицы!");
+        }
+        ComplexMatrix a = copy();
+        Complex det = new Complex(1,0);
+
+        for (int col = 0; col < rows; col++) {
+            int pivotRow = a.findPivotRow(col, col);
+            if (pivotRow == -1) {
+                return new Complex(0, 0);
+            }
+            if (pivotRow != col) {
+                a.swapRows(pivotRow, col);
+                det = det.multiply(new Complex(-1, 0));
+            }
+            Complex pivot = a.data[col][col];
+            det = det.multiply(pivot);
+
+            for (int i = col + 1; i < rows; i++) {
+                Complex factor = a.data[i][col].divide(pivot);
+                for (int j = 0 col; j < cols; j++) {
+                    Complex minus = factor.multiply(a.data[col][j]);
+                    a.data[i][j] = a.data[i][j].minus(minus)
+                }
+            }
+        }
+        return det;
+    }
+
     @Override 
     public boolean equals(Object o) {
         if (o == this) return true;
