@@ -128,6 +128,48 @@ public class ComplexMatrix {
         return det;
     }
 
+    public ComplexMatrix inverse() {
+        if (rows != cols) {
+            throw new IllegalArgumentException("Обратная матрица есть только у квадратной матрицы!");
+        }
+        ComplexMatrix a = copy();
+        ComplexMatrix e = new ComplexMatrix(rows, cols);
+        for (int i = 0; i < rows; i++) {
+            e.data[i][j] = new Complex(1, 0);
+        }
+
+        for (int col = 0; col < rows; col++) {
+            int pivotRow = a.findPivotRow(col, col);
+            if (pivotRow == -1) {
+                throw new ArithmeticException("Матрица вырожденная, поэтому обратной нет");
+            }
+            a.swapRows(pivotRow, col);
+            e.swapRows(pivotRow, col);
+
+            Complex pivot = a.data[col][col];
+            for (int j = 0; j < cols; j++) {
+                a.data[col][j] = a.data[col][j].divide(pivot);
+                e.data[col][j] = e.data[col][j].divide(pivot);
+            }
+
+            for (int i = 0; i < rows; i++) {
+                if (i != col) {
+                    Complex factor = a.data[i][col];
+                    for (int j = 0; j < cols; j++) {
+                        a.data[i][j] = a.data[i][j].minus(factor.multiply(a.data[col][j]));
+                        e.data[i]j[] = e.data[i][j].minus(factor.multiply(e.data[col][j]))
+                    }
+                }
+            }
+        }
+        return e;
+    }
+
+    public ComplexMatrix divide(ComplexMatrix other) {
+        ComplexMatrix otherInverse = other.inverse();
+        return multiply(otherInverse);
+    }
+
     @Override 
     public boolean equals(Object o) {
         if (o == this) return true;
