@@ -46,6 +46,23 @@ public class ComplexMatrix {
         return result;
     }
 
+    public ComplexMatrix multiply(ComplexMatrix other) {
+        if (cols != other.rows) {
+            throw new IllegalArgumentException("Умножить нельзя: число столбцов в первой матрице должно быть равно числу строк во второй");
+        }
+        ComplexMatrix result = new ComplexMatrix(rows, other.cols);
+        for (int i = 0; i < rows; i++) {
+            for (int j = 0; j < other.cols; j++) {
+                Complex sum = new Complex(0, 0);
+                for (int k = 0; k < cols; k++) {
+                    sum = sum.add(data[i][k].multiply(other.data[k][j]));
+                }
+                result.data[i][j] = sum;
+            }
+        }
+        return result
+    }
+
     @Override 
     public boolean equals(Object o) {
         if (o == this) return true;
