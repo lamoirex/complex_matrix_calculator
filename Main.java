@@ -75,4 +75,40 @@ public class Main {
             }
         }
     }
+
+    private static Complex readComplex(String message) {
+        while (true) {
+            System.out.print(message);
+            String line = scanner.nextLine().trim().replace(",", ".");
+            String[] parts = line.split("\\s+");
+            try {
+                if (parts.length == 1) {
+                    return new Complex(Double.parseDouble(parts[0]), 0);
+                } else if (parts.length == 2) {
+                    double re = Double.parseDouble(parts[0]);
+                    double im = Double.parseDouble(parts[1]);
+                    return new Complex(re, im);
+                }
+                System.out.println("Нужно ввести одно или два числа");
+            } catch (NumberFormatException error) {
+                System.out.println("Не получилось прочитать число, попробуйте еще");
+            }
+        }
+    }
+
+    private static ComplexMatrix readMatrix(String name) {
+        System.out.println();
+        System.out.println("Ввод матрицы " + name);
+        int rows = readInt("Количество строк (от 1 до 10): ", 1, 10);
+        int cols = readInt("Количество столбцов (от 1 до 10): ", 1, 10);
+    
+        ComplexMatrix matrix = new ComplexMatrix(rows, cols);
+        for (int i = 0; i < rows; i++) {
+            for (int j = 0; j < cols; j++) {
+                String message = name + "[" + (i + 1) + "][" + (j + 1) + "] = ";
+                matrix.set(i, j, readComplex(message));
+            }
+        }
+        return matrix;
+    }
 }
