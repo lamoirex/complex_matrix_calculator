@@ -59,4 +59,20 @@ public class Main {
         System.out.println("Результат:");
         System.out.print(result);
     }
+
+    private static int readInt(String message, int min, int max) {
+        while (true) {
+            System.out.print(message);
+            String line = scanner.nextLine().trim();
+            try {
+                int number = Integer.parseInt(line);
+                if (number >= min && number <= max) {
+                    return number;
+                }
+                System.out.println("Число должно быть от " + min + " до " + max + ".");
+            } catch (NumberFormatException error) {
+                System.out.println("Это не целое число, попробуйте еще.");
+            }
+        }
+    }
 }
