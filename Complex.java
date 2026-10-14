@@ -52,7 +52,7 @@ public class Complex {
     }
 
     private double round(double x) {
-        return Math.round(x * 10000) / 10000.0
+        return Math.round(x * 10000) / 10000.0;
     }
 
     @Override 

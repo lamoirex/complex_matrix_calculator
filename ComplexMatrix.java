@@ -55,12 +55,12 @@ public class ComplexMatrix {
             for (int j = 0; j < other.cols; j++) {
                 Complex sum = new Complex(0, 0);
                 for (int k = 0; k < cols; k++) {
-                    sum = sum.add(data[i][k].multiply(other.data[k][j]));
+                    sum = sum.plus(data[i][k].multiply(other.data[k][j]));
                 }
                 result.data[i][j] = sum;
             }
         }
-        return result
+        return result;
     }
 
     public ComplexMatrix transpose() {
@@ -119,9 +119,9 @@ public class ComplexMatrix {
 
             for (int i = col + 1; i < rows; i++) {
                 Complex factor = a.data[i][col].divide(pivot);
-                for (int j = 0 col; j < cols; j++) {
+                for (int j = 0; j < cols; j++) {
                     Complex minus = factor.multiply(a.data[col][j]);
-                    a.data[i][j] = a.data[i][j].minus(minus)
+                    a.data[i][j] = a.data[i][j].minus(minus);
                 }
             }
         }
@@ -135,7 +135,7 @@ public class ComplexMatrix {
         ComplexMatrix a = copy();
         ComplexMatrix e = new ComplexMatrix(rows, cols);
         for (int i = 0; i < rows; i++) {
-            e.data[i][j] = new Complex(1, 0);
+            e.data[i][i] = new Complex(1, 0);
         }
 
         for (int col = 0; col < rows; col++) {
@@ -157,7 +157,7 @@ public class ComplexMatrix {
                     Complex factor = a.data[i][col];
                     for (int j = 0; j < cols; j++) {
                         a.data[i][j] = a.data[i][j].minus(factor.multiply(a.data[col][j]));
-                        e.data[i]j[] = e.data[i][j].minus(factor.multiply(e.data[col][j]))
+                        e.data[i][j] = e.data[i][j].minus(factor.multiply(e.data[col][j]));
                     }
                 }
             }

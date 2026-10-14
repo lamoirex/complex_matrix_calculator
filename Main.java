@@ -41,7 +41,7 @@ public class Main {
                 System.out.println("Ошибка: " + error.getMessage());
             }
         }
-        System.out.println("Программа завершена.")
+        System.out.println("Программа завершена.");
     }
 
     private static void printMenu() {
