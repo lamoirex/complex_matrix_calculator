@@ -54,4 +54,9 @@ public class Main {
         System.out.println("5. Вычислить определитель матрицы");
         System.out.println("0. Выход");
     }
+
+    private static void printResult(ComplexMatrix result) {
+        System.out.println("Результат:");
+        System.out.print(result);
+    }
 }
