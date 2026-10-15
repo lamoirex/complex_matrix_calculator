@@ -3,6 +3,8 @@ import java.util.Scanner;
 public class Main {
     private static Scanner scanner = new Scanner(System.in);
 
+    private static ComplexMatrix lastResult = null;
+
     public static void main(String[] args) {
         System.out.println("=== КАЛЬКУЛЯТОР МАТРИЦ КОМПЛЕКСНЫХ ЧИСЕЛ ===");
         System.out.println("Каждый элемент матрицы вводится как два числа через пробел: действительная и мнимая части.");
@@ -11,7 +13,7 @@ public class Main {
         boolean running = true;
         while (running) {
             printMenu();
-            int choice = readInt("Выберите пункт меню: ", 0, 5);
+            int choice = readInt("Выберите пункт меню: ", 0, 6);
 
             try {
                 if (choice == 0) {
@@ -19,21 +21,23 @@ public class Main {
                 } else if (choice == 1) {
                     ComplexMatrix a = readMatrix("A");
                     ComplexMatrix b = readMatrix("B");
-                    printResult(a.add(b));
+                    saveAndPrint(a.add(b));
                 } else if (choice == 2) {
                     ComplexMatrix a = readMatrix("A");
                     ComplexMatrix b = readMatrix("B");
-                    printResult(a.multiply(b));
+                    saveAndPrint(a.multiply(b));
                 } else if (choice == 3) {
                     ComplexMatrix a = readMatrix("A");
                     ComplexMatrix b = readMatrix("B");
-                    printResult(a.divide(b));
+                    saveAndPrint(a.divide(b));
                 } else if (choice == 4) {
                     ComplexMatrix a = readMatrix("A");
-                    printResult(a.transpose());
+                    saveAndPrint(a.transpose());
                 } else if (choice == 5) {
                     ComplexMatrix a = readMatrix("A");
                     System.out.println("Определитель: " + a.determinant());
+                } else if (choice == 6) {
+                    showLastResult();
                 }
             } catch (IllegalArgumentException error) {
                 System.out.println("Ошибка: " + error.getMessage());
@@ -52,12 +56,23 @@ public class Main {
         System.out.println("3. Разделить две матрицы (A / B)");
         System.out.println("4. Транспонировать матрицу");
         System.out.println("5. Вычислить определитель матрицы");
+        System.out.println("6. Показать сохраненный результат");
         System.out.println("0. Выход");
     }
 
-    private static void printResult(ComplexMatrix result) {
-        System.out.println("Результат:");
+    private static void saveAndPrint(ComplexMatrix result) {
+        lastResult = result;
+        System.out.println("Результат (сохранен для следующих операций): ");
         System.out.print(result);
+    }
+
+    private static void showLastResult() {
+        if (lastResult == null) {
+            System.out.println("Пока нет сохраненного результата.");
+        } else {
+            System.out.println("Сохраненный результат:");
+            System.out.print(lastResult);
+        }
     }
 
     private static int readInt(String message, int min, int max) {
