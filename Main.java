@@ -19,22 +19,22 @@ public class Main {
                 if (choice == 0) {
                     running = false;
                 } else if (choice == 1) {
-                    ComplexMatrix a = readMatrix("A");
-                    ComplexMatrix b = readMatrix("B");
+                    ComplexMatrix a = getMatrix("A");
+                    ComplexMatrix b = getMatrix("B");
                     saveAndPrint(a.add(b));
                 } else if (choice == 2) {
-                    ComplexMatrix a = readMatrix("A");
-                    ComplexMatrix b = readMatrix("B");
+                    ComplexMatrix a = getMatrix("A");
+                    ComplexMatrix b = getMatrix("B");
                     saveAndPrint(a.multiply(b));
                 } else if (choice == 3) {
-                    ComplexMatrix a = readMatrix("A");
-                    ComplexMatrix b = readMatrix("B");
+                    ComplexMatrix a = getMatrix("A");
+                    ComplexMatrix b = getMatrix("B");
                     saveAndPrint(a.divide(b));
                 } else if (choice == 4) {
-                    ComplexMatrix a = readMatrix("A");
+                    ComplexMatrix a = getMatrix("A");
                     saveAndPrint(a.transpose());
                 } else if (choice == 5) {
-                    ComplexMatrix a = readMatrix("A");
+                    ComplexMatrix a = getMatrix("A");
                     System.out.println("Определитель: " + a.determinant());
                 } else if (choice == 6) {
                     showLastResult();
@@ -73,6 +73,19 @@ public class Main {
             System.out.println("Сохраненный результат:");
             System.out.print(lastResult);
         }
+    }
+
+    private static ComplexMatrix getMatrix(String name) {
+        if (lastResult != null) {
+            System.out.println();
+            System.out.println("Есть сохраненный результат прошлой операции");
+            System.out.print(lastResult);
+            int answer = readInt("Взять его как матрицу " + name + "? (1 - да, 2 - ввести новую матрицу): ", 1, 2);
+            if (answer == 1) {
+                return lastResult;
+            }
+        }
+        return readMatrix(name);
     }
 
     private static int readInt(String message, int min, int max) {
